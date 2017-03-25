@@ -1,0 +1,14 @@
+
+%currently gives back the answer of 4*x when i want it to be x. If i divide the y[]by 4 then it is 1/4x
+hhhhhhhmmmmmmmmm
+function y=my_ifft(x)
+n=length(x);
+if n==1
+    y=x;
+else 
+    w=exp(2i*pi/n*(0:n/2-1)');
+    even=my_ifft(x(1:2:n-1));
+    odd=my_ifft(x(2:2:n));
+    y=[even+w.*odd; even-w.*odd];
+end
+end 
