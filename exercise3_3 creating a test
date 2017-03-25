@@ -1,0 +1,27 @@
+%this is one file 
+%creates an input 
+
+
+function X = my_fft(f)
+  n = length(f);
+  N = pow2(ceil(log2(n)));
+  f = [f, zeros(1, N - n)];
+  X = fft_rec(f);
+  X = X(1:n);
+  
+  %this is in another file but calls the my_fft
+  
+  function test_fft()
+  t = 1 : 40;
+  y = sin(t);
+  F = zeros(1, length(t));
+  F = my_fft(y);
+  x = zeros(1, length(F));
+  for i = 1 : length(F)
+    x(i) = i;
+  end
+  plot(x, abs(F));
+  hold;
+  F2 = fft(y);
+  plot(x, abs(F2),'c');
+  plot(x, abs(F2)-abs(F), 'r');
