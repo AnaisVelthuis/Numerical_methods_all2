@@ -1,0 +1,27 @@
+%from the internet help 
+%this works 
+
+function [] = ex2()
+ 
+ fig = figure();
+ hax = axes('Parent', fig);
+ axis(hax, 'manual')
+ [x,y] = getpts();
+
+ M = [x y]
+
+ T = cumsum(sqrt([0,diff(x')].^2 + [0,diff(y')].^2));
+
+ T_i = linspace(T(1),T(end),1000);
+
+ X_i = interp1(T,x',T_i,'cubic');
+ Y_i = interp1(T,y',T_i,'cubic');
+
+ plot(x,y,'b.',X_i,Y_i,'r-')
+ CenterOfMass= [mean(X_i),mean(Y_i)]
+ plot(x,y,'b.',X_i,Y_i,'r-')
+ hold on
+ plot(CenterOfMass(1),CenterOfMass(2),'ro')
+%plot(x,y,'b.',xi,yi,'r-')
+%using green thm: f2=x f1 = 0 (chosen), use trapz() for
+%%lineintergral
