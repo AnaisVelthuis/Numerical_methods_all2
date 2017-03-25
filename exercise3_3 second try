@@ -1,0 +1,20 @@
+%this function works and is also the same result when using fft as in matlab
+function F = tinestra_assignment3_3(f)
+n = length(f);  
+if (n == 1)
+  F = f;
+else
+  f_even = f(1:2:n);
+  f_odd = f(2:2:n);
+  X1 = tinestra_assignment3_3(f_even);
+  X2 = tinestra_assignment3_3(f_odd).*Wn(n);  
+  F1 = X1 + X2;
+  F2 = X1 - X2;
+  F = [F1 F2];
+end
+
+function W = Wn(n)
+m = n/2;
+W = exp(-2*pi*j.*[0:1:m-1]/n);
+end
+end 
